@@ -26,10 +26,3 @@ for(i = 0; i <letters.length; i++) {
 }
 
 console.log(first_letter_str);
-
-
-// №3
-
-function Data(number) {
-	if(typeof(number) === "number")
-}
