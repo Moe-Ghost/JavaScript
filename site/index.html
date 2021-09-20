@@ -114,31 +114,31 @@
     <p>Join <strong>over 500,000</strong> couple who've registered at Zola.</p>
   </div>
   <div class="comments">
-    <ul class="users">
-      <li class="user">
-        <img src="https://media.istockphoto.com/photos/smiling-man-in-the-living-room-is-taking-a-selfie-picture-id813935198?k=20&m=813935198&s=612x612&w=0&h=6gNade8eFqii-8fmy4CTb3yl21qeLyxLHGe5TBnQBmI=">
-        <span>text text text text text </span>
-      </li>
-      <li class="user">
-         <img src="https://img.freepik.com/free-photo/portrait-of-young-bearded-hipster-man-looking-at-camera-and-taking-a-selfie-against-yellow_58466-11455.jpg?size=626&ext=jpg&ga=GA1.2.1151995299.1610236800">
-         <span>text text text text text </span>
-      </li>
-      <li class="user">
-         <img src="https://img.freepik.com/free-photo/portrait-of-young-bearded-hipster-man-looking-at-camera-and-taking-a-selfie-against-yellow_58466-11455.jpg?size=626&ext=jpg&ga=GA1.2.1151995299.1610236800">
-         <span>text text text text text </span>
-      </li>
-    </ul>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <img src='' class="img-fluid" alt="" id='first_im'>
+        <p id="first_user"></p>
+        <p id="comm1"></p>
+      </div>
+      <div class="col-12 col-md-4">
+        <img src='' class="img-fluid" alt="" id='second_im'>
+        <p id="second_user"></p>
+        <p id="comm2"></p>
+      </div>
+      <div class="col-12 col-md-4">
+        <img src="" class="img-fluid" alt="" id='third_im'>
+        <p id="third_user"></p>
+        <p id="comm3"></p>
+      </div>
+    </div>
   </div>
-<div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
-</div> 
+<nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" id="1"><a class="page-link" href="1">1</a></li>
+    <li class="page-item" id="2"><a class="page-link" href="2">2</a></li>
+    <li class="page-item"id="3"><a class="page-link" href="3">3</a></li>
+  </ul>
+</nav> 
 <div class="jumbotron">
     <div class="container">
       <div class="row">
@@ -205,6 +205,71 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script>
+
+  $.ajax({
+    url: 'https://randomuser.me/api/?page=1&results=3&seed=abc',
+    data: '',
+    dataType: 'json',
+    success: function (data) {
+      document.getElementById("first_im").src = data.results[0].picture.medium;
+      document.getElementById("first_user").textContent = data.results[0].name.title + ' ' + data.results[0].name.first + ' ' + data.results[0].name.last;
+      document.getElementById("comm1").textContent = data.results[0].login.sha256;
+      document.getElementById("second_im").src = data.results[1].picture.medium;
+      document.getElementById("second_user").textContent = data.results[1].name.title + ' ' + data.results[1].name.first + ' ' + data.results[1].name.last;
+      document.getElementById("comm2").textContent = data.results[1].login.sha256;
+      document.getElementById("third_im").src = data.results[2].picture.medium;
+      document.getElementById("third_user").textContent = data.results[2].name.title + ' ' + data.results[2].name.first + ' ' + data.results[2].name.last;
+      document.getElementById("comm3").textContent = data.results[2].login.sha256;
+    }
+  })
+  $('[href="1"]').on('click', function () {
+        event.preventDefault();
+        $.ajax({
+            url: 'https://randomuser.me/api/?page=1&results=3&seed=abc',
+            data: '',
+            dataType: 'json',
+            success: function (data) {
+                pagination(data);
+            }
+        })
+    })
+
+    $('[href="2"]').on('click', function () {
+        event.preventDefault();
+        $.ajax({
+            url: 'https://randomuser.me/api/?page=2&results=3&seed=abc',
+            data: '',
+            dataType: 'json',
+            success: function (data) {
+                pagination(data);
+            }
+        })
+    })
+
+    $('[href="3"]').on('click', function () {
+        event.preventDefault();
+        $.ajax({
+            url: 'https://randomuser.me/api/?page=3&results=3&seed=abc',
+            data: '',
+            dataType: 'json',
+            success: function (data) {
+                pagination(data);
+            }
+        })
+    })
+
+    function pagination(data) {
+        document.getElementById("first_im").src = data.results[0].picture.medium;
+        document.getElementById("first_user").textContent = data.results[0].name.title + ' ' + data.results[0].name.first + ' ' + data.results[0].name.last;
+        document.getElementById("comm1").textContent = data.results[0].login.sha256;
+        document.getElementById("second_im").src = data.results[1].picture.medium;
+        document.getElementById("second_user").textContent = data.results[1].name.title + ' ' + data.results[1].name.first + ' ' + data.results[1].name.last;
+        document.getElementById("comm2").textContent = data.results[1].login.sha256;
+        document.getElementById("third_im").src = data.results[2].picture.medium;
+        document.getElementById("third_user").textContent = data.results[2].name.title + ' ' + data.results[2].name.first + ' ' + data.results[2].name.last;
+        document.getElementById("comm3").textContent = data.results[2].login.sha256;
+    }
+
     $('form').submit(function (event) {
         event.preventDefault();
 
